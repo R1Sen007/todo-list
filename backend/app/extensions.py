@@ -6,6 +6,8 @@ from sqlalchemy.orm import (
     declared_attr,
     mapped_column,
 )
+from flask_migrate import Migrate
+from flask_jwt_extended import JWTManager
 
 
 class Base(DeclarativeBase):
@@ -21,3 +23,7 @@ class Base(DeclarativeBase):
 
 
 db = SQLAlchemy(model_class=Base)
+
+migrate = Migrate()
+
+jwt = JWTManager()

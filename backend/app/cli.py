@@ -1,6 +1,6 @@
 import click
 from flask.cli import with_appcontext
-from sqlalchemy import inspect, select
+from sqlalchemy import inspect, select, or_
 
 from app.extensions import db
 from app.models.user import User
@@ -14,15 +14,18 @@ def create_first_superuser():
 
     if inspector.has_table('user'):
         query = select(User)\
-            .where(User.email == Config.ADMIN_EMAIL)
+            .where(
+                or_(User.email == Config.ADMIN_EMAIL,
+                    User.username == Config.ADMIN_USERNAME)
+            )
         user = db.session.execute(query).first()
         if not user:
             user = User(
                 username=Config.ADMIN_USERNAME,
-                password=Config.ADMIN_PASSWORD,  # todo  add hashing passsword
                 email=Config.ADMIN_EMAIL,
                 is_superuser=True
             )
+            user.set_password(Config.ADMIN_PASSWORD)
             db.session.add(user)
             db.session.commit()
             print('Superuser created.')
