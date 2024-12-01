@@ -18,7 +18,7 @@ def create_first_superuser():
                 or_(User.email == Config.ADMIN_EMAIL,
                     User.username == Config.ADMIN_USERNAME)
             )
-        user = db.session.execute(query).first()
+        user = db.session.execute(query).scalars().first()
         if not user:
             user = User(
                 username=Config.ADMIN_USERNAME,
