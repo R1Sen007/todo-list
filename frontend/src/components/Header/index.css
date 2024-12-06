@@ -1,5 +1,5 @@
 nav {
-    margin: 2rem 10% 0;
+    /* margin: 2rem 10% 0; */
     padding: 1rem;
     /* margin-top: 2rem; */
     border-radius: 2rem;
@@ -10,7 +10,8 @@ nav {
     ); */
     background: var(--color-bg-variant);
     display: inline-flex;
-    width: var(--container-width-lg);
-    justify-content: space-evenly;
+    /* width: var(--container-width-lg); */
+    width: 100%;
+    justify-content: space-between;
     align-items: center;
 }

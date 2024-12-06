@@ -1,0 +1,40 @@
+.todo-card {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 30%;
+    background: var(--color-bg-variant);
+    border: 0.1rem solid var(--color-primary);
+    border-radius: 1rem;
+    padding: 0.5rem;
+}
+
+.todo-card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.todo-card-body {
+
+}
+
+.todo-card-footer {
+
+}
+
+.todo-card-info {
+
+}
+
+.todo-card-status {
+
+}
+
+.todo-card-username {
+
+}
+
+.todo-card-email {
+
+}
