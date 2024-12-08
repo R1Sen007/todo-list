@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { login, fetchUserData } from '../../features/auth/authThunk';
 import Button from '../../components/Button';
+import './index.css'
 
 
 const schema = yup.object().shape({
@@ -24,7 +25,7 @@ const schema = yup.object().shape({
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { token, loading } = useSelector((state) => state.auth);
+  const { loading } = useSelector((state) => state.auth);
   const { register, handleSubmit, formState: { errors }, setError } = useForm({ resolver: yupResolver(schema) });
   const [showPassword, setShowPassword] = useState(false);
 
@@ -73,26 +74,36 @@ const Login = () => {
       <div>
         <h2>Login</h2>
       </div>
+      <div className='login-container'>
+        <form onSubmit={handleSubmit(handleLogin)}>
+          <div className='login-email'>
+            <input
+              type="email"
+              {...register("email")}
+              autoComplete="email"
+              placeholder="Email"
+            />
+            {errors.email && <p>{errors.email.message}</p>}
+          </div>
 
-      <form onSubmit={handleSubmit(handleLogin)}>
-        <input
-          type="email"
-          {...register("email")}
-          autoComplete="email"
-          placeholder="Email"
-        // className={`${styles.authFormInput} ${errors.email ? styles.errorInput : ''}`}
-        />
-        {errors.email && <p>{errors.email.message}</p>}
-        <input
-          type={showPassword ? "text" : "password"}
-          {...register("password")}
-          autoComplete="current-password"
-          placeholder="Пароль"
-        // className={`${styles.authFormInput} ${errors.password ? styles.errorInput : ''}`}
-        />
-        {errors.password && <p>{errors.password.message}</p>}
-        {loading ? <div className="loading"><span>Loading...</span></div> : <Button type='submit' name='login' />}
-      </form>
+          <div className='login-password'>
+            <input
+              type={showPassword ? "text" : "password"}
+              {...register("password")}
+              autoComplete="current-password"
+              placeholder="Пароль"
+            />
+            {errors.password && <p>{errors.password.message}</p>}
+          </div>
+
+          {
+            loading ?
+              <div className="loading"><span>Loading...</span></div>
+              :
+              <Button type='submit' name='login' className='login-btn' />
+          }
+        </form>
+      </div>
     </div>
   );
 }

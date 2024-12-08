@@ -6,6 +6,7 @@ from marshmallow import ValidationError
 from app.api.error_handlers import InvalidAPIUsage
 from app.extensions import db
 from app.models.user import User
+from app.constants import AVAILABLE_COLUMNS_TO_ORDER
 
 
 def validate_schema_data(json, schema):
@@ -38,12 +39,12 @@ def check_login_data(email, password):
     if not user:
         raise InvalidAPIUsage(
             status_code=HTTPStatus.UNAUTHORIZED,
-            message='Bad email or Password'
+            message='BAD EMAIL OR PASSWORD'
         )
     if not user.check_password(password):
         raise InvalidAPIUsage(
             status_code=HTTPStatus.UNAUTHORIZED,
-            message='Bad email or Password'
+            message='BAD EMAIL OR PASSWORD'
         )
     return user
 
@@ -66,3 +67,22 @@ def check_email_exists(email):
         raise InvalidAPIUsage(
             message='EMAIL ALREADY EXISTS.'
         )
+
+
+def check_admin_role(is_superuser):
+    if not is_superuser:
+        raise InvalidAPIUsage(
+            status_code=HTTPStatus.FORBIDDEN,
+            message='YOU HAVEN`T ADMIN PERMISSIONS'
+        )
+
+
+def validate_order_params(order: str):
+    if order.startswith('-'):
+        direction = 'desc'
+        order = order[1:]
+    else:
+        direction = 'asc'
+    if order not in AVAILABLE_COLUMNS_TO_ORDER:
+        order = AVAILABLE_COLUMNS_TO_ORDER[0]
+    return order, direction

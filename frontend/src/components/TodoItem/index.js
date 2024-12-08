@@ -1,28 +1,37 @@
 import React from 'react';
 import './index.css'
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+import Button from '../Button';
 
 
-const TodoItem = () => {
+const TodoItem = ({ id, username, email, status, text, edited_by_admin }) => {
+  const { userData } = useSelector((state) => state.auth);
+  const navigate = useNavigate()
+
+  const handleEdit = () => { navigate(`edit/${id}`) };
+
   return (
     <div className='todo-card'>
       <div className='todo-card-header'>
         <div className='todo-card-info'>
           <div className='todo-card-username'>
-            <h3>John Doe</h3>
+            <h3>{username}</h3>
           </div>
           <div className='todo-card-email'>
-            email@example.com
+            {email}
           </div>
         </div>
         <div className='todo-card-status'>
-          active
+          {status}
         </div>
       </div>
       <div className='todo-card-body'>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet accumsan blandit. Cras rhoncus lacus lectus, malesuada dignissim arcu rhoncus.
+        {text}
       </div>
       <div className='todo-card-footer'>
-        if admin button will be here
+        {edited_by_admin && <span>edited by admin</span>}
+        {userData && userData.is_superuser && <Button name='edit' className='btn-admin-edit' onClick={handleEdit} />}
       </div>
     </div>
   );

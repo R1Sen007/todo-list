@@ -1,17 +1,13 @@
 nav {
-    /* margin: 2rem 10% 0; */
     padding: 1rem;
-    /* margin-top: 2rem; */
     border-radius: 2rem;
-    /* background: linear-gradient(
-        62deg,
-        var(--color-bg-variant),
-        transparent
-    ); */
     background: var(--color-bg-variant);
     display: inline-flex;
-    /* width: var(--container-width-lg); */
     width: 100%;
     justify-content: space-between;
     align-items: center;
+}
+
+a {
+    cursor: pointer;
 }

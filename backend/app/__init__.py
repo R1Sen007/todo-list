@@ -1,17 +1,28 @@
-from flask import Flask
+from flask import Flask, request, Response
+from flask_cors import CORS
+from werkzeug.exceptions import HTTPException
 
 from settings import Config
 from app.extensions import db, migrate, jwt
 from app.cli import create_first_superuser
 from app.api.error_handlers import (
     InvalidAPIUsage,
-    invalid_api_usage
+    handle_exception,
+    invalid_api_usage,
 )
 
+# def basic_authentication():
+#     if request.method.lower() == 'options':
+#         return Response()
 
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
+    app.url_map.strict_slashes = False
+    cors = CORS(
+        app,
+        resources={r"/api/*": {"origins": "http://localhost:3000"}},
+    )
 
     db.init_app(app)
     migrate.init_app(app, db)
@@ -25,4 +36,9 @@ def create_app(config_class=Config):
         InvalidAPIUsage,
         invalid_api_usage,
     )
+    app.register_error_handler(
+        HTTPException,
+        handle_exception,
+    )
+    # app.before_request(basic_authentication)
     return app

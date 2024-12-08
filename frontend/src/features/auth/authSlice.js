@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { login, signOut, fetchUserData } from './authThunk';
-import { getToken, getUserData } from '../../utils/dataFunctions';
+import { getToken, getUserData, removeToken, removeUserData } from '../../utils/dataFunctions';
 
 
 const initialState = {
@@ -12,7 +12,14 @@ const initialState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    clearUserData: (state) => {
+      state.token = null;
+      state.userData = null;
+      removeToken();
+      removeUserData();
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
@@ -21,12 +28,12 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         const accessToken = action.payload.access_token;
         state.token = accessToken;
-        // state.userData = user;
         state.loading = false;
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
       })
+
       .addCase(signOut.fulfilled, (state, action) => {
         state.loading = false;
         state.userData = {};
@@ -37,7 +44,7 @@ const authSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchUserData.fulfilled, (state, action) => {
-        state.userData = {...action.payload}
+        state.userData = { ...action.payload }
         state.loading = false;
       })
       .addCase(fetchUserData.rejected, (state, action) => {
@@ -46,21 +53,9 @@ const authSlice = createSlice({
         state.token = null;
       })
   },
-
-  // {
-  //   [login.fulfilled]: (state, action) => {
-  //     const { accessToken } = action.payload;
-  //     state.token = accessToken;
-  //     // state.userData = user;
-  //     state.loading = false;
-  //   },
-  //   [login.rejected]: (state, action) => {
-  //     state.loading = false;
-  //   },
-  // }
 });
 
-export const { } = authSlice.actions;
+export const { clearUserData } = authSlice.actions;
 
 
 export default authSlice.reducer;

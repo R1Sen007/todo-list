@@ -18,3 +18,7 @@ class InvalidAPIUsage(Exception):
 
 def invalid_api_usage(error):
     return jsonify(error.to_dict()), error.status_code
+
+
+def handle_exception(e):
+    return jsonify({"message": e.description}), e.code

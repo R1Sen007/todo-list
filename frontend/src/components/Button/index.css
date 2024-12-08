@@ -1,6 +1,69 @@
+button {
+    cursor: pointer;
+}
+
 button.btn-login {
     padding: 1rem;
     border: 0;
-    border-radius: 1.5rem;
+    border-radius: 0.5rem;
     background: var(--color-primary);
+}
+
+button.btn-admin-edit {
+    padding: 0.5rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background: var(--color-primary);
+}
+
+button.btn-control-filter {
+    padding: 0.5rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background: var(--color-primary);
+}
+
+button.btn-control-todo {
+    padding: 0.5rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background: var(--color-primary);
+}
+
+button.btn-pagination {
+    padding: 0.5rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background: var(--color-primary);
+}
+
+button.createform-btn {
+    padding: 0.5rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background: var(--color-primary);
+    width: 15%;
+}
+
+button.login-btn {
+    padding: 0.5rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background: var(--color-primary);
+    width: 15%;
+}
+button.edit-btn {
+    padding: 0.5rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background: var(--color-primary);
+    width: 15%;
+}
+
+button:hover {
+    background: var(--color-white);
+}
+
+button:disabled {
+    background: var(--color-light);
 }

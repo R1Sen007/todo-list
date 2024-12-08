@@ -35,6 +35,9 @@ class UserSchema(Schema):
             validate.Length(min=PASSWORD_MIN_CHAR, max=PASSWORD_MAX_CHAR)
         ]
     )
+    is_superuser = fields.Bool(
+        dump_only=True,
+    )
 
     class Meta:
         unknown = EXCLUDE

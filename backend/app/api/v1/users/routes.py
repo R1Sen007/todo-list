@@ -1,6 +1,6 @@
 from http import HTTPStatus
 from flask import Blueprint, request
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, current_user
 
 from app.extensions import db
 from app.models.user import User
@@ -15,7 +15,7 @@ from app.api.validators import (
 users = Blueprint('users', __name__)
 
 
-@users.post('/')
+@users.post('')
 def register():
     json = request.get_json()
 
@@ -37,4 +37,8 @@ def register():
 @users.get('/me')
 @jwt_required()
 def me():
-    return 'ACCESS GRANTED!'
+    # print(request.headers)
+    user_schema = UserSchema()
+    # print(current_user)
+    data = user_schema.dump(current_user)
+    return data, HTTPStatus.OK

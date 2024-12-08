@@ -7,29 +7,33 @@ import './index.css'
 
 
 const Header = () => {
-  const { token, loading, userData } = useSelector((state) => state.auth);
+  const { token, userData } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const onSignOut = () => {
+    dispatch(signOut())
+    navigate('/')
+  };
+
+  const onSignIn = () => navigate('/login');
+
   return (
     <nav>
-      ToDo List
+      <a onClick={() => { navigate('/') }}>ToDo List</a>
       {userData && userData.username}
       {
         token ?
           <Button
             name='Sign OUT'
             className='btn-login'
-            onClick={() => {
-              dispatch(signOut())
-              navigate('/')
-            }}
+            onClick={onSignOut}
           />
           :
           <Button
             name='Sign IN'
             className='btn-login'
-          onClick={() => { navigate('/login') }}
+            onClick={onSignIn}
           />
       }
     </nav>
