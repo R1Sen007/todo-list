@@ -1,0 +1,19 @@
+.control-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.control-filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 0.5rem;
+}
+
+.control-todo-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 0.5rem;
+}

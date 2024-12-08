@@ -1,0 +1,38 @@
+:root {
+  /* ---BLUE VARIANT--- */
+  --color-bg: #1f1f38;
+  --color-bg-variant: #2c2c6c;
+  --color-primary: #4db5ff;
+  --color-primary-variant: rgba(77, 181, 255, 0.4);
+
+  /* ---ORANGE VARIANT--- */
+  /* --color-bg: #38281f;
+  --color-bg-variant: #6c4b2c;
+  --color-primary: #ee7828;
+  --color-primary-variant: rgba(255, 122, 77, 0.4); */
+  
+  --color-white: #fff;
+  --color-light: rgba(255, 255, 255, 0.6);
+
+  --transition: all 400ms ease;
+
+  --container-width-lg: 75%;
+  --container-width-md: 86%;
+  --container-width-sm: 90%;
+}
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--color-bg);
+  color: var(--color-white);
+  line-height: 1.7;
+  background-attachment: fixed;
+}
+
+
+
+
+.App {
+  margin: 0 5.62rem;
+}

@@ -1,0 +1,13 @@
+nav {
+    padding: 1rem;
+    border-radius: 2rem;
+    background: var(--color-bg-variant);
+    display: inline-flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a {
+    cursor: pointer;
+}
