@@ -1,0 +1,5 @@
+venv
+.git
+db.sqlite3
+fastapi.db
+.vscode

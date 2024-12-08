@@ -1,13 +1,10 @@
 from marshmallow import (
     Schema,
-    ValidationError,
     fields,
-    post_dump,
-    post_load,
-    pre_load,
     validate,
     EXCLUDE
 )
+
 from app.constants import (
     USERNAME_MIN_CHAR,
     USERNAME_MAX_CHAR,

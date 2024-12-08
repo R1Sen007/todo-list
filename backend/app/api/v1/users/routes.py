@@ -37,8 +37,6 @@ def register():
 @users.get('/me')
 @jwt_required()
 def me():
-    # print(request.headers)
     user_schema = UserSchema()
-    # print(current_user)
     data = user_schema.dump(current_user)
     return data, HTTPStatus.OK

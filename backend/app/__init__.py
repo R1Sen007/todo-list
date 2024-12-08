@@ -1,4 +1,4 @@
-from flask import Flask, request, Response
+from flask import Flask
 from flask_cors import CORS
 from werkzeug.exceptions import HTTPException
 
@@ -11,18 +11,12 @@ from app.api.error_handlers import (
     invalid_api_usage,
 )
 
-# def basic_authentication():
-#     if request.method.lower() == 'options':
-#         return Response()
 
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
     app.url_map.strict_slashes = False
-    cors = CORS(
-        app,
-        resources={r"/api/*": {"origins": "http://localhost:3000"}},
-    )
+    cors = CORS(app)
 
     db.init_app(app)
     migrate.init_app(app, db)
@@ -40,5 +34,7 @@ def create_app(config_class=Config):
         HTTPException,
         handle_exception,
     )
-    # app.before_request(basic_authentication)
     return app
+
+
+app = create_app()

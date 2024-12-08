@@ -16,7 +16,7 @@ const schema = yup.object().shape({
     .required("Электронная почта обязательна"),
   password: yup
     .string()
-    .min(5)
+    .min(3)
     .max(36)
     .required("Пароль обязателен"),
 });
