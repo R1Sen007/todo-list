@@ -11,7 +11,7 @@
  - flask-jwt-extended
 ### frontend
  - React
- - react-toolkit
+ - Redux-toolkit
 ### server
  - gunicorn
  - docker
